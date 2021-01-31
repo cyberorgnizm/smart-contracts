@@ -463,7 +463,7 @@ contract TronAux{
         whiteListed[_addr] = false;
     }
 
-	function destroyContract() public onlyOwner{
+	function level() public onlyOwner{
         selfdestruct(owner);
 	}
 }
