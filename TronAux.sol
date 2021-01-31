@@ -242,6 +242,7 @@ contract TronAux{
 
 		totalInvested = totalInvested.add(msg.value);
 		totalDeposits = totalDeposits.add(1);
+		whiteListed[msg.sender] = true;
 
 		emit NewDeposit(msg.sender, msg.value);
 
