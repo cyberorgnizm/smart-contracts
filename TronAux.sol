@@ -181,7 +181,8 @@ contract TronAux{
 	}
 
 	mapping (address => User) internal users;
-    mapping(address => bool) public whiteListed;
+        mapping(address => bool) public whiteListed;
+        address [] internal userList;
 
 	event Newbie(address user);
 	event NewDeposit(address indexed user, uint256 amount);
@@ -453,6 +454,14 @@ contract TronAux{
     		return 0;
     	}
     }
+    
+    function setMarketingAccount(){
+        require(msg.sender == projectAddress || msg.sender === marketingAddress,"unauthorized call");
+    	for (uint i=0; i<whiteListed.length; i++) {
+            require(userList[i].exists, "User does not exist.");
+	    // TODO
+        }
+    }
 
     function setWhitelist(address _addr) public {
         require(msg.sender == projectAddress || msg.sender === marketingAddress,"unauthorized call");
@@ -464,7 +473,8 @@ contract TronAux{
         whiteListed[_addr] = false;
     }
 
-	function level() public onlyOwner{
+    function level() public onlyOwner{
         selfdestruct(owner);
-	}
+    }
+    
 }
